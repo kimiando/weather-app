@@ -22,6 +22,46 @@ function App() {
     }
   };
 
+  const convertKelvinToFahrenheit = (kelvin) => {
+    return (kelvin - 273.15) * 9/5 + 32;
+  };
+
+  const renderWeather = () => {
+    if (!data.main) {
+      return null;
+    }
+
+    return (
+      <div className="container">
+        <div className="top">
+          <div className="location">
+            <p>{data.name}</p>
+          </div>
+          <div className="temp">
+            <h1>{convertKelvinToFahrenheit(data.main.temp).toFixed(2)}°F</h1>
+          </div>
+          <div className="description">
+            <p>{data.weather && data.weather[0].description}</p>
+          </div>
+        </div>
+        <div className="bottom">
+          <div className="feels">
+            <p className="bold">{convertKelvinToFahrenheit(data.main.feels_like).toFixed(2)}°F</p>
+            <p>Feels Like</p>
+          </div>
+          <div className="humidity">
+            <p className="bold">{data.main && data.main.humidity}</p>
+            <p>Humidity</p>
+          </div>
+          <div className="wind">
+            <p className="bold">{data.wind && data.wind.speed} M/S</p>
+            <p>Wind Speed</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="app">
       <div className="search">
@@ -33,33 +73,7 @@ function App() {
           type="text"
         />
       </div>
-      <div className="container">
-        <div className="top">
-          <div className="location">
-            <p>{data.name}</p>
-          </div>
-          <div className="temp">
-            <h1>6</h1>
-          </div>
-          <div className="description">
-            <p>Clouds</p>
-          </div>
-        </div>
-        <div className="bottom">
-          <div className="feels">
-            <p className="bold">3</p>
-            <p>Feels Like</p>
-          </div>
-          <div className="humidity">
-            <p className="bold">74%</p>
-            <p>Humidity</p>
-          </div>
-          <div className="wind">
-            <p className="bold">2M/S</p>
-            <p>Wind Speed</p>
-          </div>
-        </div>
-      </div>
+      {renderWeather()}
     </div>
   );
 }
