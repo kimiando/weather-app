@@ -35,7 +35,7 @@ function App() {
       <div className="container">
         <div className="top">
           <div className="location">
-            <p>{data.name}</p>
+            <h5>{data.name}</h5>
           </div>
           <div className="temp">
             <h1>{convertKelvinToFahrenheit(data.main.temp).toFixed(2)}°F</h1>
@@ -64,6 +64,7 @@ function App() {
 
   return (
     <div className="app">
+      {renderWeather()}
       <div className="search">
         <input
           value={location}
@@ -73,7 +74,6 @@ function App() {
           type="text"
         />
       </div>
-      {renderWeather()}
     </div>
   );
 }
